@@ -1,0 +1,20 @@
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+{% if user.is_authenticated %}
+    <li>User: {{ user.get_username }}</li>     
+    {% if image %}
+    <div style="align-items: center;">
+        {% for i in scores_range %}
+        <a class="btn btn-primary" href="{% url 'index'%}"> 
+            <button class='button button1' type='submit'> {{i}}</button>    
+        </a>
+    {% endfor %}
+    <img src="{{image.image_path}}"/>
+    </div>
+    {% else %}
+    <p>No images are available to grade right now.</p>
+    {% endif %}
+
+{% else %}
+    <li><a href="{% url 'login'%}?next={{request.path}}">Login</a></li>
+{% endif %}

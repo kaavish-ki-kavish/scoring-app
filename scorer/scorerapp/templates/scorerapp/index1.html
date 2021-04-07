@@ -1,0 +1,37 @@
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+{% if user.is_authenticated %}
+    <li>User: {{ user.get_username }}</li>     
+    {% if image %}
+        <input type="hidden" value = {{image.pk}} id="hidden">
+        <div style="align-items: center;">
+            {% for i in scores_range %}
+            <a class="btn btn-primary" href="{% url 'index'%}"> 
+                <button class='button button1' type='submit' value = "{{i}}", onclick="hello(this.value)"> {{i}}</button>    
+            </a>
+        {% endfor %}
+        <img src="{{image.image_path}}"/>
+        </div>
+    {% else %}
+        <p>No images are available to grade right now.</p>
+    {% endif %}
+{% else %}
+    <li><a href="{% url 'login'%}?next={{request.path}}">Login</a></li>
+{% endif %}
+<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+<script type="text/javascript">
+
+function hello(value){
+    var pk = document.getElementById("hidden").value;
+    $.ajax({
+       url: "{% url 'index' %}",
+       data: {
+            value: value,
+            post_pk: pk,
+            dataType: "json",
+            type: "POST",
+    }
+    });
+}
+
+</script>
