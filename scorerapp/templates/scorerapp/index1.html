@@ -1,7 +1,8 @@
 {% load static %}
 <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
 {% if user.is_authenticated %}
-    <li>User: {{ user.get_username }}</li>     
+    <li style="font-size: 28px;"> User: {{ user.get_username }}</li> 
+    <li style="font-size: 28px;"> Image: {{ image_name }}</li>     
     {% if image %}
         <input type="hidden" value = {{image.pk}} id="hidden">
         <img style="border: 5px solid black" width="400" height="400" src="{{image.image_path}}"/>

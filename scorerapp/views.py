@@ -4,7 +4,7 @@ from django.template import loader
 import random
 from django.contrib.auth.decorators import login_required
 
-
+SPLITTER = 'https://raw.githubusercontent.com/kaavish-ki-kavish/aangan-filesystem/main/aagan-urdu-filesystem/'
 @login_required
 def index(request):
     user = request.user.get_username()
@@ -22,9 +22,22 @@ def index(request):
 
     image_scores_lst = ImageScore.objects.all().filter(scorer=user, score = -1)
     image_score = random.choice(image_scores_lst) if image_scores_lst else None
+    img_url = ''
+
+    if image_score:
+        img_url = image_score.image_path
+        img_url = img_url.split(SPLITTER)
+            
+        if len(img_url) > 1:
+            img_url = img_url[1]
+        else:
+            img_url = img_url[0]
+        print(img_url, image_score.image_path)
+
     template = loader.get_template('scorerapp/index1.html')
     context = {
         'image': image_score,
         'scores_range':  [0, 20, 40, 60, 80, 100],
+        'image_name': img_url
     }
     return HttpResponse(template.render(context, request))
