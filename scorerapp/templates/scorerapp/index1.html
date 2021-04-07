@@ -4,7 +4,7 @@
     <li>User: {{ user.get_username }}</li>     
     {% if image %}
         <input type="hidden" value = {{image.pk}} id="hidden">
-        <img width="400" height="400" src="{{image.image_path}}"/>
+        <img style="border: 5px solid black" width="400" height="400" src="{{image.image_path}}"/>
             
         <div style="align-items: center; align-content: center; align-self: center;">
             {% for i in scores_range %}
