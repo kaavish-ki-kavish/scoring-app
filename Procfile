@@ -1,1 +1,1 @@
-web: gunicorn scorer.wsgi --log-file -
+web: gunicorn scorer/scorer.wsgi --log-file -
