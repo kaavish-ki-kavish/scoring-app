@@ -25,6 +25,6 @@ def index(request):
     template = loader.get_template('scorerapp/index1.html')
     context = {
         'image': image_score,
-        'scores_range': [0, 20, 40, 60, 80, 100],
+        'scores_range':  [0, 20, 40, 60, 80, 100],
     }
     return HttpResponse(template.render(context, request))
