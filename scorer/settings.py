@@ -35,7 +35,7 @@ SECRET_KEY = 'kr8fnd55^cx9pw^4xms)d!%h7o+ksuoh#14&_del^^w%#z28(!'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['aangan-score.herokuapp.com']
 
 
 # Application definition
