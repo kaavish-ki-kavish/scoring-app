@@ -1,18 +1,21 @@
 from scorerapp.models import ImageScore
 import random
-
+import pandas as pd
 
 SCORERS = ['huda', 'faraz', 'mudasir', 'kainat', 'hareem']
 
-url = 'https://raw.githubusercontent.com/kaavish-ki-kavish/aangan-filesystem/main/aagan-urdu-filesystem/'
-filepath = 'list_cat.txt'
-with open('list_cat.txt', 'r') as f:
-    cats = f.read().split('\n')
+url = 'https://raw.githubusercontent.com/kaavish-ki-kavish/dataset_urdu_chars/main/image_paths.csv'
 
-for cat in cats:
-    if cat:
-        cat = url + cat + '/' + cat + '-01.png'
+filepath = 'https://raw.githubusercontent.com/kaavish-ki-kavish/dataset_urdu_chars/main/images/'
+
+df = pd.read_csv(url)
+print(len(df))
+print(ImageScore.objects.all().count())
+for (i, row) in df.iterrows():
+    img_path = filepath + row['img_paths']
+    num_results = ImageScore.objects.filter(image_path = img_path).count()
+    if num_results == 0:
         scorer = random.choice(SCORERS)
-        image_obj = ImageScore.objects.create(image_path = cat, scorer = scorer)
+        image_obj = ImageScore.objects.create(image_path = img_path, scorer = scorer)
         scorer = random.choice(SCORERS)
-        image_obj = ImageScore.objects.create(image_path = cat, scorer = scorer)
+        image_obj = ImageScore.objects.create(image_path = img_path, scorer = scorer)
