@@ -26,13 +26,13 @@ def index(request):
 
     if image_score:
         img_url = image_score.image_path
-        img_url = img_url.split(SPLITTER)
+        img_url = img_url.split(SPLITTER)[-1]
         if 'alif_mad_aa' in img_url:
-            img_url = ' '.join(img_url[-1].split('_')[-3:])
+            img_url = ' '.join(img_url.split('_')[:3])
         if 'choti_yaa' in img_url or 'bari_yaa' in img_url:
-            img_url = ' '.join(img_url[-1].split('_')[-2:])
+            img_url = ' '.join(img_url.split('_')[:2])
         else:
-            img_url = img_url[-1].split('_')[0]
+            img_url = img_url.split('_')[0]
         print(img_url, image_score.image_path)
 
     template = loader.get_template('scorerapp/index1.html')
