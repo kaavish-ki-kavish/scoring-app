@@ -1,6 +1,6 @@
-from scorerapp.models import ImageScore
 import random
 import pandas as pd
+from scorerapp.models import ImageScore
 
 SCORERS = ['huda', 'faraz', 'mudasir', 'kainat', 'hareem']
 
