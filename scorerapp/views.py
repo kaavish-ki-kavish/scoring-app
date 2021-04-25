@@ -10,6 +10,7 @@ def index(request):
     user = request.user.get_username()
     print(user)
     url = request.build_absolute_uri()
+    scored = False
     if 'post_pk' in url:
         from urllib.parse import urlparse, parse_qs
         s = url
@@ -19,7 +20,10 @@ def index(request):
         image_score = ImageScore.objects.all().filter(pk = int(post_pk))[0]
         image_score.score = int(value)
         image_score.save()
-        
+        scored = True
+    if scored: 
+        for i in range(3):
+            print('SCOREDDDDDDDDDDDDDDDDDDDDDDDDDDDDD')
     image_scores_lst = ImageScore.objects.all().filter(scorer=user, score = -1)
     image_score = random.choice(image_scores_lst) if image_scores_lst else None
     img_url = ''
