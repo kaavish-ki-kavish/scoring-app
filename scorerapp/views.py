@@ -19,7 +19,6 @@ def index(request):
         image_score = ImageScore.objects.all().filter(pk = int(post_pk))[0]
         image_score.score = int(value)
         image_score.save()
-        return
         
     image_scores_lst = ImageScore.objects.all().filter(scorer=user, score = -1)
     image_score = random.choice(image_scores_lst) if image_scores_lst else None
