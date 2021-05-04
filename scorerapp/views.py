@@ -24,14 +24,14 @@ def index(request):
     if scored: 
         for i in range(3):
             print('SCOREDDDDDDDDDDDDDDDDDDDDDDDDDDDDD')
-    if user == 'huda':
-        print('hudaaaaaaaaaaaa')
-        image_scores_lst = ImageScore.objects.all().filter(id__gt=9000, scorer=user, score = -1)
-        print(image_scores_lst.count())
-        image_score = random.choice(image_scores_lst) if image_scores_lst else None
-    else:
-        image_scores_lst = ImageScore.objects.all().filter(scorer=user, score = -1)
-        image_score = random.choice(image_scores_lst) if image_scores_lst else None
+#     if user == 'huda':
+#         print('hudaaaaaaaaaaaa')
+#         image_scores_lst = ImageScore.objects.all().filter(id__gt=9000, scorer=user, score = -1)
+#         print(image_scores_lst.count())
+#         image_score = random.choice(image_scores_lst) if image_scores_lst else None
+#     else:
+    image_scores_lst = ImageScore.objects.all().filter(scorer=user, score = -1)
+    image_score = random.choice(image_scores_lst) if image_scores_lst else None
     img_url = ''
 
     if image_score:
